@@ -1,0 +1,9 @@
+# ncbrowse Enviornment save file
+set envfVersion 1.0
+set envfMsgFmt {*%s,%T (%F):%M}
+set envfSort {-category -severity -tag}
+set envfFilter {}
+set envfGeometry 850x590+219+237
+set envfVertSplit {50.0 50.0}
+set envfHorizSplit {80.0 20.0}
+set envfOrder {name}

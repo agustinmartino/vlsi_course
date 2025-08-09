@@ -1,0 +1,1 @@
+\rm -rf *.log INCA_libs work *.log *.key hal.design_facts .nclaunch* .nfs* worklib

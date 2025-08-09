@@ -1,0 +1,348 @@
+               //**************************************************
+               //***     CUSTOMIZED HAL DEFINITIONS FILE       ****
+               //***     FOR CODINGSTYLE/LINT CHECKS           ****
+               //**************************************************
+
+// Each category definition contains the name and description of
+// checks (or other categories) that make up the body of the category.
+//
+// Optionally, the category may contain keywords 'synth_only', 'default_on'
+// or 'default_off' after the description.  These keywords, if present,
+// control which categories are checked by default (default_off/default_on)
+// and whether or not the category is affected by the synthesis_off/on
+// pragmas in the HDL source (synth_only).
+
+
+
+//***************************************************************************
+//** Following is the description of the category hierarchy                **
+//***************************************************************************
+
+// Only the categories which have or can have language specific checks are 
+// further classified into sub-categories on the basis of language. Those
+// which are not classified, by default have checks which are applicable
+// to both Verilog and VHDL designs. 
+
+
+
+
+
+category RTL_CODINGSTYLE "Category of all the RTL coding style checks" default_on
+{
+ RTL_CODINGSTYLE_VERILOG        //Category of all the Verilog only Coding style checks
+ RTL_CODINGSTYLE_MIXED          //Category of all the Coding style checks for Verilog & VHDL
+}
+
+
+//***************************************************************************
+//** Following is the detail of the checks present in each category in HAL **
+//***************************************************************************
+
+
+
+category RTL_CODINGSTYLE_VERILOG "Verilog only coding style checks" default_on
+{
+  NBCOMB   // "Non-blocking assignment encountered in combinational block"
+  IGNDLY   // "Lumped delay in module '%s' ignored"
+  BADSYS   // "System task '%s' in module '%s' ignored" 
+  CDEFCV   // "The case items of the case statement cover all the numerical values of the case expression, the default clause is not required"
+  RTLNOG   // "Gate instances are not expected in an RTL design"
+  RTLNOP   // "Primitive instances are not expected in an RTL design"
+  RTLINI   // "A variable/signal '%s' in an RTL description is initialized in its declaration"
+  BLNBLK   // "Signal '%s' is assigned via both blocking and non-blocking assignments"
+  PLIFTN   // "PLI 1.0 function %s in module '%s' ignored"
+  EMPSTM   // "Module '%s' contains an empty statement"
+  EMPBLK   // "Module '%s' contains an empty begin/end block"
+  IGNSTR   // "Strength values ignored"
+  LIBIMP   // "'%s' is supported only in library cells"
+  NOSPEC   // "Specify block in the module '%s' is ignored"
+  INIMEM   // "Initialization of memory '%s' in module '%s' ignored"
+  NOGATE   // "Module <mod-name> contains unsupported gate type <type>"
+  NOSWTC   // "Module <mod-name> contains unsupported switch type <type>"
+  NOWIRE   // "Module <mod-name> contains node <name> of unsupported <type> type"
+  IPRTEX   // "Integer is used in port expression"
+  FSETGV   // "Function '%s' in module '%s' assigns to global variable '%s'"
+  FUSEGV   // "Function '%s' in module '%s' uses global variable '%s'"
+  TSETGV   // "Task '%s' in module '%s' assigns to global variable '%s'"
+  TUSEGV   // "Task '%s' in module '%s' uses global variable '%s'"
+  USEPAR   // "Parameter '%s' is unused"
+  EVUNTR   // "Event variable '%s' is never triggered"
+  USETSK   // "Task '%s' is unused"
+  LOGAND   // "Bitwise AND in a conditional expression.  Logical AND may have been intended"
+  LOGORP   // "Bitwise OR in a conditional expression.  Logical OR may have been intended"
+  LOGNEG   // "Bitwise negation in a conditional expression.  Logical NOT may have been intended"
+  MULOPR   // "Logical %s operator applied to multi-bit operand%s"
+  CDEFNC   // "Case statement without a default clause"
+  INCMPC   // "Not all cases are covered in the parallel case (%d of possible %d covered)"
+  FCWDEF   // "Redundant case expression -- full_case has a default case"
+  CASEZX   // "Case item expression contains 'x' for a casez statement (useful only in casex statements)"
+  OBMEMI   // "Memory word '%s[%s]' has an index with size %d which may reference a memory word which is outside of the defined range of the memory (%d words)"
+  DIFRNG   // "Port '%s' with range (%d to %d) is redeclared with different range (%d to %d)"
+  INTEGD   // "Delay expression is not an integer"
+  CONSTD   // "Delay is not a constant expression"
+  CONSLC   // "Module '%s' contains a loop with a constant conditional expression"
+  OOMCAL   // "Use of an out-of-module task call to %s"
+  INPOUT   // "Primary input port %s of module %s may be driven inside the module"
+  SIZMIS   // "Port '%s' has Size mismatch between module instantiation and declaration"
+  NULPRT   // "Module '%s' has null formal port(s)"
+  UASWIR   // "Wire '%s' defined in module '%s' is unassigned but drives at least an object"
+  UASREG   // "Local register variable '%s' is unassigned but is read at least once in the module %s"
+  URDWIR   // "Wire '%s' defined in module '%s' does not drive any object but is assigned at least once"
+  URDREG   // "Local register variable '%s' is not read but assigned at least once in the module '%s'"
+  URAWIR   // "Wire '%s' defined in module '%s' is unused (neither read nor assigned)"
+  URAREG   // "Local register variable '%s' defined in %s '%s' is unused (neither read nor assigned)"
+  IMPNET   // "Net '%s' has implicit declaration"
+  CXZSIG   // "In module '%s', Assignment statements corresponding to '%s' item has a non-constant driver"
+  RDBFAS   // "Register '%s', assigned using blocking assignment, is being read before getting assigned"
+  REVROP   // "Register '%s' is being read/assigned outside the process in which it was assigned using blocking assignment"
+}
+
+
+
+category RTL_CODINGSTYLE_MIXED "coding style checks for Verilog & VHDL" default_on
+{
+  CBYNAM   // "Port connections for instance '%s' of module '%s' should be made by name rather than by positional ordered list"
+  PBYNAM   // "Named association should be used in the parameter list for %s call '%s'"
+  IMPFSM   // "Module '%s' contains an implicit finite-state machine"
+  TIESUP   // "The output/inout '%s' is tied to supply0/supply1"
+  TIELOG   // "The output/inout '%s' is assigned a constant logic value"
+  TFARGT   // "Task/function call argument %d is of wrong type (%s vs. %s)"
+  TFARGN   // "Task/function call has wrong number of arguments"
+  TFWARG   // "Too few arguments to switch/gate"
+  INPASN   // "Assignment to a module input port '%s' is not supported"
+  DCLSCP   // "Variable '%s' defined in scope '%s' is also defined in parent scope '%s'"
+  UNCONN   // "%s port '%s' defined in design unit '%s' is not connected in its instance '%s'"
+  UNCONI   // "Input port '%s' of entity/module '%s' is being used inside architecture/module but not connected (either partially or completely) in its instance '%s'"
+  UNCONO   // "Port '%s' (which is being used as an output) of entity/module ' %s' is being driven inside the design but not connected (either partially or completely) in its instance '%s'"
+  UNDRIV   // "Primary output/inout '%s' is not driven in the module '%s'"
+  USEFTN   // "Function '%s' is unused"
+  USEVAR   // "Variable '%s' defined in %s '%s' is unused"
+  USEPRT   // "Input port '%s' defined in %s '%s' is unused"
+  CONSTC   // "Constant conditional expression"
+  SHFTNC   // "Shift by non-constant"
+  SHFTOF   // "Shift overflow, some bits will be lost"
+  REALCM   // "Real operand in logical comparison"
+  UELASG   // "Unequal length LHS and RHS in assignment"
+  UELCIT   // "Unequal length in case item comparison (selector is %d bits, case tag expression is %d bits)"
+  UELOPR   // "Unequal length operand in bit/arithmetic operator"
+  INTTOB   // "Assigning a 0 or 1 (32 bits) to a single bit variable"
+  CNSTCI   // "Case expression is not a constant"
+  TRUNCC   // "Truncation of bits in a constant.  The most significant bits are lost"
+  TRUNCZ   // "Truncation in constant conversion without a loss of bits"
+  BSINTT   // "Bit/part select of integer or time variable '%s' encountered"
+  EXTEND   // "Extension of '0' bits in a constant"
+  ULRELE   // "Unequal length operands in relational operator (padding produces incorrect result) -- LHS operand is %d bits, RHS operand is %d bits"
+  ULCMPE   // "Unequal length operands in equality operator (padding produces incorrect result) -- LHS operand is %d bits, RHS operand is %d bits"
+  CEXPOR   // "Case expression out of range"
+  CIMULT   // "Case expression covered more than once"
+  NULCSE   // "Null staement should not be used in 'when others' clause in case statement"
+  REALCT   // "Real comparison in case expression"
+  CNSTCI   // "Case expression is not a constant"
+  WIDSEL   // "Case statement with no default, case is too wide to check if all cases are covered"
+  NESTIF   // "Nested ifs.  Consider using a case or casex statement instead"
+  DNGLEL   // "Dangling else.  Make sure nesting is correct"
+  MEMSIZ   // "Memory declaration for '%s' defines a single bit memory word; check for error in reg declaration"
+  OOBIDX   // "Bit/part select '%s' (%d) is outside of the defined range (%d to %d)"
+  NULLRG   // "In %s '%s' node '%s' has a null range defined"
+  IDXRNG   // "Loop index is too small for the values it should take"
+  INTTOB   // "Assigning a 0 or 1 (32 bits) to a single bit variable"
+  OUTINP   // "Primary output port %s of module %s may be driven outside the module"
+  RDREAL   // "Real literal is rounded to the nearest integer"
+  CNREAL   // "Real variable '%s' is used in module '%s'. Use of real variables is not supported"
+  CNINTB   // "Converting integer to single bit"
+  CNTIME   // "Time variable '%s' is used in %s '%s'. Use of time variable is not supported"
+  INFLOP   // "%s '%s' contains a possibly infinite loop"
+  MISSEL   // "%s signal '%s' missing from sensitivity list of a sequential process/block"
+  USESEL   // "Signal '%s' should not be used in the sensitivity list of a sequential process/block"
+  NOTECH   // "Instance '%s' is instantiating a technology cell. Avoid using technology cells in the design"
+  POOBID   // "Variable index/range selection of '%s' is potentially outside of the defined range"
+  IDXTSM   // "Variable index/range selection of '%s' is too small to access its definedrange completely"
+  NOTECH   // "Instance '%s' is instantiating a technology cell. Avoid using technology cells in the design"
+}
+
+ 
+
+
+//***************************************************************************
+//**    Following is the description of the default HAL parameters         **
+//***************************************************************************
+
+// **********************
+// Overall HAL parameters
+// **********************
+
+// ***********************************************************
+// ** Parameter for Allowing/Disallowing severity downgrade **
+// ***********************************************************
+// By default, HAL does not allow message severity to be downgraded (e.g.
+// by specifying a {warning} parameter for a message that was originally
+// flagged as an ERROR).  This behavior can be changed by setting the
+// 'severity_downgradable' parameter below to 'yes'.
+
+params HAL   {severity_downgradable=no}
+// params HAL {severity_downgradable=yes}
+
+
+// ***********************************************************
+// **     Parameter for controlling unclassified rules      **
+// ***********************************************************
+// By default, HAL does not report messages which are not mentioned in
+// this file.  However, there are flows in which it would be preferable
+// for unclassified messages to be be reported. The parameter below can
+// be used to change this default behavior.
+
+params HAL {disable_unclassified_rules=yes}
+//params HAL {disable_unclassified_rules=no}
+
+
+// ***********************************************************
+// **     Parameter for controlling error suppression       **
+// ***********************************************************
+// By default, HAL allows checks with severity error to be suppresssed
+// using -NOCHECK <check_name>/<category_name> command. However if the
+// requirement is such that the error severity checks are always flagged,
+// the parameter below can be used to change the behavior.
+
+params HAL   {allow_error_suppression=yes}
+//params HAL {allow_error_suppression=no}
+
+
+// ***********************************************************
+// **     Parameter for displaying lint pragma control      **
+// ***********************************************************
+// If the lint pragmas are used in the design, then by default, the
+// check/category control introduced using lint pragmas is not output
+// in the hal.log file. In case, the information is required, the
+// parameter below, can be used to display the information in the logfile.
+
+params HAL {display_rule_control=no}
+// params HAL {display_rule_control=yes}
+
+
+// ****************************
+// Category specific parameters
+// ****************************
+
+
+// ***********************************************************
+// ** Parameters for controlling the checks in the category **
+// ** BEH_CODING_STYLE_VHDL and RTL_CODING_STYLE_VHDL       **
+// ***********************************************************
+
+// The checks in the category BEH_CODING_STYLE_VHDL and 
+// RTL_CODING_STYLE_VHDL are sensitive to the architecture name
+// in the design. By default, the checks in these categories are
+// triggered when the architecture name complies to the naming 
+// convention prescribed by RMM, to name architectures at different
+// levels of abstraction i.e Behavioral and RTL. The below 
+// parameters can be used to change the architecture naming pattern
+// to which the checks in these two categories are sensitive.
+
+params RTL_ARCHNM {pattern="^(RTL|STR)" text=""}
+params BEH_ARCHNM {pattern="^(TB|SIM|BEH)" text=""}
+
+
+
+
+// ****************************
+// Check specific parameters
+// ****************************
+
+// ***********************************************************
+// **   Parameters to specify the file format conventions   **
+// ***********************************************************
+
+params MAXPRT {max_ports=25}
+params MLITNU {max_literals=20}
+params SUBPLN {max_lines=300}
+params MXPROC {max_processes=10}
+params PBYNAM {num_params=5}
+params FILSUF {suffix=.vhd}
+params DESULN {max_lines=400}
+params INSTLB {max_length=8}
+params IDLENG {min_length=4}
+params IDLENG {max_length=16}
+params ARCHID {suffix_list="rtl|^rtl_|_rtl$|beh|^beh_|_beh$|syn|^syn_|_syn$|ppr|^ppr_|_ppr$|logic|^logic_|_logic$|hls|^hls_|_hls$|vit|^vit_|_vit$|tst|^tst_|_tst$"}
+
+
+
+// ***********************************************************
+// ** Parameters to control the direction range for arrays  **
+// ***********************************************************
+
+// Default direction for range in array/vector declarations is "descending".
+// This can be changed to "ascending" below, if that is preferred.  This
+// only matters for the DIRRNG check which is a part of part of the RMM
+// guidelines as well as the RTL_FILE_FORMAT_MIXED category in HAL.
+
+params DIRRNG {direction=descending}
+// params DIRRNG {direction=ascending}
+
+
+// ***********************************************************
+// **Parameters to control the behavior of the UNCONN check **
+// ***********************************************************
+
+// By default HAL does not allow the user to leave the output ports of design
+// unconnected when connection is done by name, and generates an  UNCONN warning
+// for the same. The below parameter can be used to chenge this default 
+// behavior. 
+
+params UNCONN {allow_explicitly_unconnected=no}
+// params UNCONN {allow_explicitly_unconnected=yes}
+
+
+// ***********************************************************
+// **  Parameters to control the output of -RULES_CHECKED   **
+// ***********************************************************
+
+// The following parameters controls the output of -RULES_CHECKED option.
+// Following four RULREP parameters in the defines file allow to select
+// the kind of rules to be reported by the '-RULES_CHECKED' option:
+//  1. Rules successfully checked on the design (no violation)
+//     params RULREP {report_successfull=yes|no}
+params RULREP {report_successfull=yes}
+
+//  2. Rules violated on the design (one or more violations)
+//     params RULREP {report_violated=yes|no}
+params RULREP {report_violated=yes}
+
+// Rules not checked on the design
+//  3. Deselected or not selected rules from the defines file
+//     params RULREP {report_unchecked=yes|no}
+params RULREP {report_unchecked=yes}
+
+//  4. Unclassified rules in the definitions file
+// params RULREP {report_unclassified=yes|no}
+params RULREP {report_unclassified=no}
+
+
+// ***********************************************************
+// **  Parameters to control the behavior of CBYNAM check   **
+// ***********************************************************
+
+// The following parameter controls whether the CBYNAM messages should
+// be issued for library cells.
+// ie. modules with `celldefine statement in Verilog
+// and VITAL design units in VHDL with VITAL_LEVEL0&1 attributes.
+// By default HAL will flag this check for technology cells instantiated
+// in the design.
+
+params CBYNAM {check_tech_cells=yes}
+// params CBYNAM {check_tech_cells=no}
+
+
+// ***********************************************************
+// ********  Parameters to control the behavior of  **********
+// ********   RDBFAS/REVROP check                    *********
+// ***********************************************************
+
+// In Verilog, if a register is assigned using a blocking 
+// assignment in an always block then this register will be 
+// considered as if it was a "variable" in VHDL process
+// There are two checks for this kind of "variable" and these
+// are RDBFAS and REVROP. By default these checks will be disabled
+
+params VERILOG_VARIABLE_CHECKS {check_verilog_reg_as_vhdl_var=no}
+// params VERILOG_VARIABLE_CHECKS {check_verilog_reg_as_vhdl_var=yes}
+ 
