@@ -160,7 +160,50 @@ category RTL_CODINGSTYLE_MIXED "coding style checks for Verilog & VHDL" default_
   NOTECH   // "Instance '%s' is instantiating a technology cell. Avoid using technology cells in the design"
 }
 
- 
+ category RMM "All checks complying to Reuse Methodology Manual" default_off
+{
+  CMBPAU {level=0}  // "Combinational loop detected through '%s' in module/design-unit '%s'"
+  ASNCFL {level=0}  // "Asynchronous feedback loop detected through set/reset of flip-flop(s) and '%s' in module/design-unit '%s'"
+  GTDCLK {level=0}  // "Clock gating detected for clock '%s' of flip-flop '%s'"
+  ACNCPI {level=0} // "Asynchronous %s '%s' of latch/flip-flop '%s' is not controllable from primary inputs"
+  LATINF {level=0}  // "Latch inferred for '%s'"
+  MULMCK {level=1}  // "Multiple master clocks found. Clock '%s' for flip-flop '%s' is derived from master input '%s', while the previously detected clocks were derived from '%s' for flip-flop '%s'"
+  MRSTDT {level=1}  // "Mix of synchronous and asynchronous set/reset found. Synchronous set/reset detected in '%s' and asynchronous set/reset detected in '%s'"
+  TPOUNR {level=1}  // "Output '%s' of top-level module is not a register"
+  MISSEL {level=1}  // "%s signal '%s' missing from sensitivity list of a sequential process/block"
+  USESEL {level=1}  // "Signal '%s' should not be used in the sensitivity list of a sequential process/block"
+  CBYNAM {level=1} // "Port connections should be made by name rather than position"
+  NOTECH {level=1}  // "Instance '%s' is instantiating a technology cell. Avoid using technology cells in the design"
+  ATLGLC {level=1} // "Glue logic inferred in top-level module/design-unit '%s'"
+  DIFCLK {level=2}  // "Clock '%s' is being renamed to '%s'"
+  DIFRST {level=2}  // "Set/Reset '%s' is being renamed to '%s'"
+  VERCAS {level=2}  // "Identifier, label, instance, or module name '%s' reused with just case difference" 
+  DIRRNG {level=2}  // "Inconsistent ordering of bits in range declarations in module/design-unit %s"
+  KYEDIF {level=2}  // "EDIF reserved word '%s' used as an identifier or label"
+  TSBINF {level=3} // "Signal '%s' defined in module/design-unit '%s', is inferred as a tri-state buffer"
+  STYVAL {level=3}  // "Numeric value '%d' used for identifier '%s'. Use constants to avoid portability issues"
+  STYBLK {level=3}  // "Block statement used. This will create portability issues"
+  VHDREP {level=3}  // "Repeated usage of identifier or label name '%s'"
+  VERREP {level=3}  // "Repeated usage of identifier or label name '%s'"
+  MULTMF {level=3}  // "More than one module definition in file '%s'"
+  KEYWOD {level=3}  // "VHDL reserved word '%s' used as an identifier or label"
+  KVHWOD {level=3}  // "Verilog reserved word '%s' used as an identifier or label"
+  STYSUL {level=3}  // "Type std_ulogic used for identifier '%s'. Use std_logic to avoid portability issues"
+  STYSUV {level=3}  // "Type std_ulogic vector used for identifier '%s'. Use std_logic_vector to avoid portability issues"
+  STYBIT {level=3}  // "Type bit used for identifier '%s'. Use std_logic to avoid portability issues"
+  STYBTV {level=3}  // "Type bit_vector used for identifier '%s'. Use std_logic_vector to avoid portability issues"
+  CKEYWD {level=3}  // "C/C++ reserved word '%s' used as an identifier or label"
+  SYNSCU {level=3} // "Embedded synthesis script used in the design"
+  UPCLBL {level=4}  // "Label '%s' should be written in uppercase"
+  DIFFMN {level=4}  // "%s name '%s' differs from file name '%s'"
+  NOBLKN {level=4}  // "Each block should be labeled with a meaningful name"
+  SEPLIN {level=4}  // "Use a separate line for each HDL statement"
+  NOINSN {level=4}  // "Each module/gate/primitive instance should be labeled with a meaningful name"
+  LCVARN {level=4}  // "Uppercase characters used for identifier '%s'. Use lowercase characters for all signal names, variable names, and port names"
+  UCCONN {level=4}  // "Lowercase characters used for identifier '%s'. Use uppercase characters for names of constants and user-defined types"
+  LCUDFT {level=4}  // "Uppercase characters used or pattern doesnt match for identifier '%s'. User defined types does not follow the naming convention"
+}
+
 
 
 //***************************************************************************

@@ -106,6 +106,7 @@ always @(posedge clk) begin
       8'h01: myReg1 <= dataIn;
       8'h02: myReg2 <= dataIn;
       8'h03: myReg3 <= dataIn;
+      default: myReg0 <= myReg0; // Retain current value, no functional change
     endcase
   end
 end

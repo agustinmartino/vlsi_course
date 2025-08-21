@@ -1,0 +1,284 @@
+               //***************************************************
+               //***     CUSTOMIZED HAL DEFINITIONS FILE        ****
+               //***FOR SYNTHESIZABILITY AND FSM MODELLING CHECKS***
+               //***************************************************
+
+// Each category definition contains the name and description of
+// checks (or other categories) that make up the body of the category.
+//
+// Optionally, the category may contain keywords 'synth_only', 'default_on'
+// or 'default_off' after the description.  These keywords, if present,
+// control which categories are checked by default (default_off/default_on)
+// and whether or not the category is affected by the synthesis_off/on
+// pragmas in the HDL source (synth_only).
+
+
+
+//***************************************************************************
+//** Following is the category description                                 **
+//***************************************************************************
+
+// Only the categories which have or can have language specific checks are 
+// further classified into sub-categories on the basis of language. Those
+// which are not classified, by default have checks which are applicable
+// to both Verilog and VHDL designs. 
+
+category FSM "Verilog and VHDL, FSM coding style checks" default_on synth_only
+{
+  FSMIDN  // "In module/design-unit '%s', FSM for state register '%s' has been recognized"
+  BADFSM  // "In module/design-unit '%s', FSM for state register '%s' does not adhere to modeling style guidelines
+  TERMST  // "In module/design-unit '%s', FSM for state register '%s' may have states with no exit condition %s"
+  UNRCHS  // "In module/design-unit '%s', FSM for state register '%s' may have unreachable states %s"
+  VARTAG  // "The specified FSM contains a variable tag in the combinatorial logic"
+  NOSTAN  // "For the specified FSM, the tool cannot perform analysis to determine terminal and unreachable states because of the large state space defined by the state register"
+  EXTSEQ  // "Extraneous logic is present in the sequential portion of the FSM"
+}
+
+
+category RTL_SYNTH "Category of all the synthesizability checks" default_on synth_only
+{
+ RTL_SYNTH_VERILOG  //Category of all the Verilog only synthesizability checks
+ RTL_SYNTH_MIXED    //Category of all the synthesizability checks for Verilog & VHDL
+}
+
+category RTL_SYNTH_VERILOG "Verilog only synthesizability checks" default_on synth_only
+{
+  EVTDCL   // "Module <mod-name> contains unsupported named event declaration <name>"
+  EVTCTL   // "Module <mod-name> contains unsupported named event control"
+  NOFREL   // "Module <mod-name> contains unsupported force/release constructs"
+  NOWAIT   // "Module <mod-name> contains unsupported wait construct"
+  NFOREV   // "Module %s contains unsupported forever construct"
+  NOFKJN   // "Module <mod-name> contains unsupported fork/join constructs"
+  PTYPUS   // "In design unit %s, ports of type \"%s\" not supported"
+  NONOWF   // "now function in design unit %s  not supported"
+  AMODNS   // "Aliased modules not supported by default. Module %s has duplicate input/inout ports which has effect of aliasing (shorting) two nets"
+  INIEVN   // "Module contains unsupported initial block with event control"
+  NODSBL   // "Module <mod-name> contains unsupported disable construct"
+  NSLOOP   // "Module <mod-name> contains contains a non-static loop"
+  NOEVRP   // "Module <mod-name> contains unsupported repeat event specification"
+  NEVREP   // "%s %s contains unsupported repeat event specification"
+  NOEXPN   // "Exponentiation operator is unsupported"
+  DPRUSP   // "Module %s has unsupported defparam statement"
+  CELVEC   // "No re-timing will be done for %s cell"
+  INFREC   // "%s %s contains possibly unbounded subprogram recursions"
+  NOLOCL   // "In module %s, local nodes of task/function %s initialized"
+  NOASLD   // "In module %s, asynchronous load NOT inferred for node %s[%d:%d]"
+  INIUSP   // "Module %s has initial block which will be ignored by synthesis tools"
+  OOMRUS   // "Module %s has unsupported OOMRs (Out-Of-Module Reference)"
+  PCAUSP   // "Module %s has unsupported assign/deassign"
+  INAEVT   // "Module <mod-name> contains unsupported intra-assignment event specification"
+  USINEV   // "%s %s contains unsupported intra-assignment event specification"
+  INTEVN  // "Module %s contains unsupported inter-statement event specification"
+}
+
+
+category RTL_SYNTH_MIXED "Verilog and VHDL  synthesizability checks" default_on synth_only
+{
+  RECFLE  // "No combinational circuit or sequential element could be recognized for %s.%s[%d:%d], The sensitivity list will be used as the trigger"
+  AMSDES  // "Analog Constructs detected in design %s"
+  ARCONV  // "Array size/shape mismatch in explicit type conversion"
+  ARSHMM  // "Array size/shape mismatch"
+  COMBLP  // "In %s %s, combinational loop detected for node %s"
+  EMTFNC  // "Function definition has empty body"
+  NULLRG  // "In design-unit/module %s, %s %s has null range defined"
+  NLCRNG  // "Range evaluates to null range"
+  PACSIG  // "In design-unit %s, read/write operation performed on signal \"%s\", declared in package \"%s \""
+  PGMENB  // "Statements on lines %d to %d, in the source file \"%s\", are under \"verification_on/off\" pragma. These statements will be processed"
+  PGMIGR  // "Statements on lines %d to %d, in the source file \"%s\", are under \"synthesis_off/on\" pragma. The semantics of the design may differ from simulation semantics"
+  PGMTSO  // "Basetype/subtype of \"%s\" has declaration under \"synthesis_off/on\" pragma"
+  PGMUSO  // "\"%s\" has declaration under \"synthesis_off/on\" pragma"
+  FNORET  // "Function has no return value and function return type is unconstrained"
+  WNORET  // "Function has no return value"
+  NSLOOP  // "%s %s contains non-static loop"
+  VARRNG  // "Left and right bounds must be constant valued expressions"
+  WDMISM  // "Width mismatch in assignment to node %s"
+  ASNCLD  // "In module %s, asynchronous load inferred for node %s[%d:%d]"
+  IMPFSM  // "%s %s contains implicit finite-state machine"
+  SENCMW  // "Sensitivity list incomplete for node %s[%d:%d] in %s. Missing signal(s) : %s"
+  SKPSUP  // "Assignment to a supply0/supply1 net %s in module %s ignored"
+  CELLOP  // "Cell %s may have combinational loops. Node %s is one of the nodes contributing to this potential loop"
+  OUTRNG  // "Bit/part select '%s' is outside of the defined range %s"
+  AWNDEL  // "%s block with no event trigger at the start in %s %s"
+  CLKASY  // "For node %s in design-unit/module %s, clock signal %s is used in asynchronous control"
+  CLKATR  // "For node %s in design unit %s, unsupported use of attribute event on %s"
+  CLKBED  // "In module/design-unit %s clock signal %s for node %s is driving data on both edges. Wrong polarity specified"
+  CLKEXP  // "In module/design-unit %s for flip-flop %s clock is an expression"
+  CLKINP  // "In %s %s clock signal %s for flip-flop %s is not an input"
+  CLKLST  // "For node %s in design-unit/module %s, assignment under the clock single-edge condition expression must be the last assignment at this level and there must not be any assignment when this condition is false after this assignment"
+  CLKMBT  // "In %s %s multi-bits %s used as clock for flip-flop %s"
+  CLKMUL  // "In module %s node %s has multiple clocks specified"
+  CLKNED  // "In module/design-unit %s clock signal %s for node %s does not drive any data. Wrong polarity specified"
+  CLKOUT  // "In module/design-unit %s for flip-flop %s clock signal %s is used as output"
+  CLKSRD  // "In module/design-unit %s clock signal %s for flip-flop %s is used as %s"
+  EMPBLK  // "Module %s has empty block"
+  OPRUSP  // "Module %s has unsupported operator %s"
+  RSTEXP  // "In module/design-unit %s for flip-flop %s reset is an expression"
+  RSTINP  // "In %s %s reset signal %s for flip-flop %s is not an input"
+  RSTOUT  // "In module/design-unit %s for flip-flop %s reset signal %s is used as output"
+  BLKBOX  // "%s %s automatically blackboxed"
+  OUTORG  // "range constraint violation in design unit %s"
+  PRTNLL  // "A port of this instance is considered undriven due to the presence of unsupported construct(s)"
+  DRPBLK  // "The %s is being dropped due to the presence of unsupported construct(s)"
+  SFNUNS  // "System function calls are not supported"
+}
+
+category RTL_SIMSYNTH "Category of pre and post-synthesis simulation mismatch checks" default_on 
+{
+ RTL_SIMSYNTH_VERILOG //Verilog only pre and post-synthesis simulation mismatch checks
+ RTL_SIMSYNTH_MIXED   //Verilog & VHDL pre and post-synthesis simulation mismatch checks
+}
+
+
+category RTL_SIMSYNTH_VERILOG "Verilog only pre and post-synthesis simulation mismatch checks" default_on
+{
+  METACX   // "In module '%s', case/casez tags evaluating to 'x' are ignored"
+  METACZ   // "In module '%s', case tags evaluating to 'z' are ignored"
+  METACO   // "In module '%s', conditional expression containing 'x'/'z' is statically evaluated to false"
+  METAEQ   // "In module '%s', === comparison treated as =="
+  EVTRIG   // "Always block with no event trigger at the start in module '%s'"
+}
+
+
+category RTL_SIMSYNTH_MIXED "Verilog/VHDL pre and post-synthesis simulation mismatch checks" default_on
+{
+  SYNTXZ   // "Synthesizing 'x'/'z' values in module '%s'"
+  XZDVAL   // "Delay value contains an x/z"
+  EXTENX   // "Extension of 'x' bits in a constant"
+  EXTENZ   // "Extension of 'z' bits in a constant"
+  INCSEL   // "'%s' missing from sensitivity list"
+  SLVMOD   // "Variable '%s' appearing in the sensitivity list is modified inside the block"
+  SLRANG   // "Range '%s' rather than full vector found in the sensitivity list -- this could lead to differences in simulation/synthesis"
+  SLVUSE   // "Variable '%s' appearing in the sensitivity list is not used in the always block"
+  IGNDLY   // "Lumped delay in module '%s' ignored"
+  BITUSD   // "The bus variable '%s' appears in the sensitivity list, but not all bits are used within the block"
+  HASLEX   // "The design contains 'synthesis_off/synthesis_on' pragmas"
+  MDLDCL   // "Signal '%s' is declared as '%s', use of '%s' can lead to simulation/synthesis mismatch"
+  FTNNAS   // "Last statement in function '%s' in module '%s' does not assign to the function"
+}
+
+category STRUCTURAL "Verilog/VHDL structural checks" default_off synth_only
+{
+  DEEPSG {level=0} // "The signal '%s' has depth greater than the threshold depth, Signal CC0 is '%s', CC1 is '%s' and CO is '%s'"
+  LFLTSE {level=0} // "Latch '%s' is feeding latch '%s' having same enable %s"
+  LFFTNE {level=0} // "Latch '%s' is feeding flip-flop '%s' which is triggered at the negative edge of latch enable %s"
+  MLTDRV {level=0} // "Signal/register '%s' is multiply driven"
+  MLTDIO {level=0} // "Inout Port '%s' is multiply driven"
+  SUTHRU {level=0} // "Possible shoot-through due to this assignment"
+  GLTASR {level=0} // "Combinatorial logic present in the path of asynchronous %s '%s' may lead to a glitch. One such affected flip-flop is '%s'"
+  RSTENA {level=0} // "%s pin %s is permanently enabled"
+  FDTHRU {level=1} // "Feedthrough detected from input '%s' to output '%s'"
+  DFDRVS {level=1} // "Drivers of sub-parts of vector '%s' are not of same type"
+  ENGTNR {level=1} // "The enable input '%s' of gated clock '%s' is %s clock input"
+  INFNOT {level=1} // "Ignoring %s '%s' with no fanout to module/design-unit outputs or child instances"
+  ATLGLC {level=1} // "Glue logic inferred in top-level module/design-unit '%s'"
+  EDGMIX {level=1} // "In module/design-unit '%s', both positive and negative edges are used for signal '%s'"
+  FRSTDF {level=1} // "Set/Reset '%s' of flip-flop '%s' is derived from flip-flop '%s'"
+  FRSTDL {level=1} // "Set/Reset '%s' of flip-flop '%s' is derived from latch '%s'"
+  LGRSTL {level=1} // "Combinational Logic present in the path of asynchronous %s"
+  CBPAHI {level=2} // "Combinatorial path crossing multiple units drives '%s'"
+  DALIAS {level=2} // "Aliased constructs found. %s '%s' and '%s' have same drivers"
+  NUMDFF {level=2} // "Number of single-bit D flip-flops present in the hierarchy is %s"
+  PRTDUP {level=2} // "There are duplicate ports with the name '%s' in module '%s'"
+  SYNASN {level=2} // "The module/design-unit '%s' contains synchronous as well as asynchronous logic"
+  MCKDMN {level=2} // "In instance '%s', clocks belong to different clock domains"
+  CLKGNP {level=2} // "The clock generation logic is placed in module/design-unit '%s', which also contains extraneous logic"
+  CLKGNH {level=2} // "The clock generation logic for clock '%s' is not at the same or a higher hierarchical level as the module/design-unit to which the clock applies"
+  RSTGNP {level=2} // "The reset generation logic is placed in module/design-unit '%s', which also contains extraneous logic"
+  RSTGNH {level=2} // "The reset generation logic for reset '%s' is not at the same or a higher hierarchical level as the module/design-unit to which the reset applies"
+  MXFNOT {level=2} //"The port '%s' of design-unit '%s' has a fanout of '%d' in its instance '%s', which exceeds the recommended limit of %d"
+  SELCLK {level=2} //"The selector of the mux is connected to the clock signal '%s'"
+  TSBINF {level=3} // "Signal '%s' defined in module/design-unit '%s', is inferred as a tri-state buffer"
+  PRTCNT {level=4} // "Module/Entity '%s' contains '%d' ports"
+  MULRST {level=4} // "Flip-flop '%s' contains multiple set/reset inputs"
+}
+
+
+
+//***************************************************************************
+//**    Following is the description of the default HAL parameters         **
+//***************************************************************************
+
+
+// ***********************************************************
+// ** Parameter for Allowing/Disallowing severity downgrade **
+// ***********************************************************
+// By default, HAL does not allow message severity to be downgraded (e.g.
+// by specifying a {warning} parameter for a message that was originally
+// flagged as an ERROR).  This behavior can be changed by setting the
+// 'severity_downgradable' parameter below to 'yes'.
+
+params HAL   {severity_downgradable=no}
+// params HAL {severity_downgradable=yes}
+
+
+// ***********************************************************
+// **     Parameter for controlling unclassified rules      **
+// ***********************************************************
+// By default, HAL does not report messages which are not mentioned in
+// this file.  However, there are flows in which it would be preferable
+// for unclassified messages to be be reported. The parameter below can
+// be used to change this default behavior.
+
+params HAL {disable_unclassified_rules=yes}
+//params HAL {disable_unclassified_rules=no}
+
+
+// ***********************************************************
+// **     Parameter for controlling error suppression       **
+// ***********************************************************
+// By default, HAL allows checks with severity error to be suppresssed
+// using -NOCHECK <check_name>/<category_name> command. However if the
+// requirement is such that the error severity checks are always flagged,
+// the parameter below can be used to change the behavior.
+
+params HAL   {allow_error_suppression=yes}
+//params HAL {allow_error_suppression=no}
+
+
+// ***********************************************************
+// **     Parameter for displaying lint pragma control      **
+// ***********************************************************
+// If the lint pragmas are used in the design, then by default, the
+// check/category control introduced using lint pragmas is not output
+// in the hal.log file. In case, the information is required, the
+// parameter below, can be used to display the information in the logfile.
+
+params HAL {display_rule_control=no}
+// params HAL {display_rule_control=yes}
+
+// ***********************************************************
+// ** Parameters to control the severity levels of checks   **
+// ***********************************************************
+
+params AWNDEL {error}
+params WAITML {error}
+params OUTRNG {error}
+params TERMST {error}
+params UNRCHS {error}
+
+// ***********************************************************
+// **  Parameters to control the output of -RULES_CHECKED   **
+// ***********************************************************
+
+// The following parameters controls the output of -RULES_CHECKED option.
+// Following four RULREP parameters in the defines file allow to select
+// the kind of rules to be reported by the '-RULES_CHECKED' option:
+//  1. Rules successfully checked on the design (no violation)
+//     params RULREP {report_successfull=yes|no}
+params RULREP {report_successfull=yes}
+
+//  2. Rules violated on the design (one or more violations)
+//     params RULREP {report_violated=yes|no}
+params RULREP {report_violated=yes}
+
+// Rules not checked on the design
+//  3. Deselected or not selected rules from the defines file
+//     params RULREP {report_unchecked=yes|no}
+params RULREP {report_unchecked=yes}
+
+//  4. Unclassified rules in the definitions file
+// params RULREP {report_unclassified=yes|no}
+params RULREP {report_unclassified=no}
+
+
+
