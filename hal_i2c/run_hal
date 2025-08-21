@@ -1,7 +1,6 @@
 ./CLEAN
 hal \
-   -incdir ../i2cslave/rtl/ \
-   -rulefile Synth_FSM.def \
+   -rulefile Lint.def \
    -NCB_ENVIRONMENT ncbrowse.ncb \
    -f filelist.f \
    -gui \
