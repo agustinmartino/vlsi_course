@@ -110,7 +110,6 @@ reg [3:0] NextState_SISt;
 // NextState logic (combinational)
 always @(*) begin
   // Default assignments to prevent latches
-  NextState_SISt = CurrState_SISt;
   next_streamSt = streamSt;
   next_txData = txData;
   next_rxData = rxData;

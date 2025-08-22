@@ -93,6 +93,7 @@ wire [7:0] dataFromRegIF;
 reg [1:0] rstPipe;
 wire rstSyncToClk;
 reg startEdgeDet;
+wire rst_serial_interface;
 
 assign sda = (sdaOut == 1'b0) ? 1'b0 : 1'bz;
 assign sdaIn = sda;
@@ -186,9 +187,11 @@ registerInterface u_registerInterface(
   .myReg7(myReg7)
 );
 
+assign rst_serial_interface = rstSyncToClk | startEdgeDet;
+
 serialInterface u_serialInterface (
   .clk(clk), 
-  .rst(rstSyncToClk | startEdgeDet), 
+  .rst(rst_serial_interface), 
   .dataIn(dataFromRegIF), 
   .dataOut(dataToRegIF), 
   .writeEn(writeEn),
