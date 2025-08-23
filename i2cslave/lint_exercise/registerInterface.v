@@ -82,6 +82,7 @@ reg [7:0] myReg0;
 reg [7:0] myReg1;
 reg [7:0] myReg2;
 reg [7:0] myReg3;
+wire write_done;
 
 // --- I2C Read
 always @(posedge clk) begin
@@ -94,6 +95,7 @@ always @(posedge clk) begin
     8'h05: dataOut <= myReg5;  
     8'h06: dataOut <= myReg6;  
     8'h07: dataOut <= myReg7;  
+    8'hxx: dataOut <= 8'hxx;  
     default: dataOut <= 8'h00;
   endcase
 end

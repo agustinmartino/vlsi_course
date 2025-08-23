@@ -87,25 +87,27 @@ reg  next_writeEn;
 
 // BINARY ENCODED state machine: SISt
 // State codes definitions using localparam
-localparam START = 4'b0000;
-localparam CHK_RD_WR = 4'b0001;
-localparam READ_RD_LOOP = 4'b0010;
-localparam READ_WT_HI = 4'b0011;
-localparam READ_CHK_LOOP_FIN = 4'b0100;
-localparam READ_WT_LO = 4'b0101;
-localparam READ_WT_ACK = 4'b0110;
-localparam WRITE_WT_LO = 4'b0111;
-localparam WRITE_WT_HI = 4'b1000;
-localparam WRITE_CHK_LOOP_FIN = 4'b1001;
-localparam WRITE_LOOP_WT_LO = 4'b1010;
-localparam WRITE_ST_LOOP = 4'b1011;
-localparam WRITE_WT_LO2 = 4'b1100;
-localparam WRITE_WT_HI2 = 4'b1101;
-localparam WRITE_CLR_WR = 4'b1110;
-localparam WRITE_CLR_ST_STOP = 4'b1111;
+localparam START = 5'b0000;
+localparam CHK_RD_WR = 5'b0001;
+localparam READ_RD_LOOP = 5'b0010;
+localparam READ_WT_HI = 5'b0011;
+localparam READ_CHK_LOOP_FIN = 5'b0100;
+localparam READ_WT_LO = 5'b0101;
+localparam READ_WT_ACK = 5'b0110;
+localparam WRITE_WT_LO = 5'b0111;
+localparam WRITE_WT_HI = 5'b1000;
+localparam WRITE_CHK_LOOP_FIN = 5'b1001;
+localparam WRITE_LOOP_WT_LO = 5'b1010;
+localparam WRITE_ST_LOOP = 5'b1011;
+localparam WRITE_WT_LO2 = 5'b1100;
+localparam WRITE_WT_HI2 = 5'b1101;
+localparam WRITE_CLR_WR = 5'b1110;
+localparam WRITE_CLR_ST_STOP = 5'b1111;
+localparam END = 5'b11111;
 
-reg [3:0] CurrState_SISt;
-reg [3:0] NextState_SISt;
+
+reg [4:0] CurrState_SISt;
+reg [4:0] NextState_SISt;
 
 // NextState logic (combinational)
 always @(*) begin
@@ -114,7 +116,6 @@ always @(*) begin
   next_txData = txData;
   next_rxData = rxData;
   next_sdaOut = sdaOut;
-  next_writeEn = writeEn;
   next_dataOut = dataOut;
   next_bitCnt = bitCnt;
   next_clearStartStopDet = clearStartStopDet;
@@ -123,7 +124,7 @@ always @(*) begin
   case (CurrState_SISt)
     START: begin
       next_streamSt = `STREAM_IDLE;
-      next_txData = 8'h00;
+      next_txData = 12'h00;
       next_rxData = 8'h00;
       next_sdaOut = 1'b1;
       next_writeEn = 1'b0;
@@ -425,6 +426,18 @@ always @(*) begin
       next_dataOut = dataOut;
       next_bitCnt = bitCnt;
       next_regAddr = regAddr;
+    end
+    END: begin
+      next_streamSt = `STREAM_IDLE;
+      next_txData = 12'h00;
+      next_rxData = 8'h00;
+      next_sdaOut = 1'b1;
+      next_writeEn = 1'b0;
+      next_dataOut = 8'h00;
+      next_bitCnt = 3'b000;
+      next_clearStartStopDet = 1'b0;
+      next_regAddr = regAddr;
+      NextState_SISt = START;
     end
     default: begin
       NextState_SISt = START;
