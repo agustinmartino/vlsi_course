@@ -1,0 +1,8 @@
+./CLEAN
+ncsdfc sdf_file.sdf -update -output i2c_compiled_sdf.sdfc
+xrun -access +rwc -timescale 1ns/1ps \
+   -NOTIMINGCHECKS -maxdelays -sdf_verbose -sdf_simtime \
+   -sdfstats sdfstats.txt -sdf_cmd_file compile_sdf.cmd \
+   -f filelist.f \
+   -gui \
+   
