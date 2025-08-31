@@ -1,5 +1,5 @@
 ./CLEAN
-xrun -access +rwc -timescale 1ns/1ps \
+xrun -access +rwc -fsmdebug -timescale 1ns/1ps \
    -f filelist.f \
    -gui \
    

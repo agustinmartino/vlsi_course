@@ -1,0 +1,6 @@
+./CLEAN
+xrun -access +rwc -fsmdebug -timescale 1ns/1ps \
+   -f filelist.f \
+   -covdut i2cSlave -coverage all -covfile covfile.ccf -covtest i2c_test_1 -covscope i2c_slave  \
+   -gui -linedebug \
+   
