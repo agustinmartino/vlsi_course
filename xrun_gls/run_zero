@@ -1,0 +1,6 @@
+./CLEAN
+xrun -access +rwc -timescale 1ns/1ps \
+   -NOTIMINGCHECKS -DELAY_MODE ZERO -SEQ_UDP_DELAY 50ps \
+   -f filelist.f \
+   -gui \
+   

@@ -3,6 +3,7 @@
 module testHarness ();
 
 reg rst;
+reg rst_slave;
 reg clk; 
 reg i2cHostClk;
 wire sda;
@@ -26,7 +27,7 @@ wire sda_padoen_o;
 
 i2cSlave u_i2cSlave(
   .clk(clk),
-  .rst(rst),
+  .rst(rst_slave),
   .sda(sda),
   .scl(scl),
   .myReg0(),
@@ -96,6 +97,7 @@ end
 task reset;
 begin
   rst <= 1'b1;
+  rst_slave <= 1'b1;
   @(posedge clk);
   @(posedge clk);
   @(posedge clk);
@@ -103,6 +105,7 @@ begin
   @(posedge clk);
   @(posedge clk);
   rst <= 1'b0;
+  rst_slave <= 1'b0;
   @(posedge clk);
   @(posedge clk);
   @(posedge clk);
