@@ -1,0 +1,7 @@
+./CLEAN
+hal \
+   -rulefile Lint.def \
+   -NCB_ENVIRONMENT ncbrowse.ncb \
+   -f filelist.f \
+   -gui \
+   
